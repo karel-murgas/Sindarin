@@ -55,13 +55,30 @@ def plurals():
     return True
 
 
+def choose_exercise():
+    """Ask for exercise type and return it's code"""
+
+    exercise = input("Which rule do you want to test?\n"
+                     "(m) Mutations\n"
+                     "(p) Pluralization\n"
+                     "(e) Exit\n").lower()
+    if exercise not in ("m", "p", "e"):
+        exercise = choose_exercise()
+    return exercise
+
+
 def run():
     """The main code calling specific lessons"""
 
     repeat = True
     while repeat:
-        #repeat = mutations()
-        repeat = plurals()
+        exercise = choose_exercise()
+        if exercise == "m":
+            repeat = mutations()
+        elif exercise == "p":
+            repeat = plurals()
+        else:
+            repeat = False
 
 
 run()
