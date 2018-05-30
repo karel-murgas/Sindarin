@@ -1,4 +1,4 @@
-"""Define grammar rules for Sindarian trainer"""
+"""Define grammar rules for Sindarin trainer"""
 #    Copyright (C) 2017  Karel "laird Odol" Murgas
 #    karel.murgas@gmail.com
 #
@@ -36,9 +36,10 @@ from constants import *
 
 def modify_for_root_exception(word):
     """Return modified word if the word's root begins with nasal or unchanged word in other cases"""
+
     char = word[0]
     if char in ROOT_EXCEPTIONS:
-        exceptions = loadtable(ROOT_EXCEPTIONS_FILES[char], separator=",")
+        exceptions = load_table(ROOT_EXCEPTIONS_FILES[char], separator=",")
         if word in [row[0] for row in exceptions]:
             return ROOT_EXCEPTIONS_STARTS[char] + word
     return word
@@ -46,6 +47,7 @@ def modify_for_root_exception(word):
 
 def create_mutation_dictionary(prefixes, end):
     """Create the dictionary with names and values of mutations"""
+
     return {
         "1-soft": prefixes[1] + end,
         "2-nasal": prefixes[2] + end,
@@ -56,7 +58,7 @@ def create_mutation_dictionary(prefixes, end):
 
 
 def try_mutation(word, length):
-    mutation_table = loadtable(MUTATIONS_FILES[length], separator=",")
+    mutation_table = load_table(MUTATIONS_FILES[length], separator=",")
     start = word[:length]
     end = word[length:]
     for row in mutation_table:
@@ -69,6 +71,7 @@ def mutate(word):
     """Return the dictionary with all mutations of given word"""
 
     word = modify_for_root_exception(word)
+    mutations = None
     if len(word) > 1:
         mutations = try_mutation(word, 2)
     if len(word) == 1 or mutations is None:
@@ -83,7 +86,7 @@ def mutate(word):
 def try_plural_exception(word):
     """Look into list of exception, if there is the given word, then return its plural"""
 
-    exceptions = loadtable(PLURAL_EXCEPTIONS_FILE, separator=",")
+    exceptions = load_table(PLURAL_EXCEPTIONS_FILE, separator=",")
     for row in exceptions:
         if row[0] == word:
             return row[1]
@@ -107,7 +110,7 @@ def is_vowel(char):
 
 
 def is_diphthong(duo):
-    """True if given two characters are legitimate diphthongs in Sindarian"""
+    """True if given two characters are legitimate diphthongs in Sindarin"""
 
     if duo in ("ae", "ai", "au", "ei", "ie", "io", "iô", "oe", "ui"):
         return True
@@ -118,7 +121,7 @@ def is_diphthong(duo):
 def mutate_vowel(chars, is_last):
     """Mutate diphthong according to table"""
 
-    mutation_table = loadtable(PLURAL_MUTATIONS_FILES[len(chars)], separator=",")
+    mutation_table = load_table(PLURAL_MUTATIONS_FILES[len(chars)], separator=",")
     if is_last:
         column = 2
     else:
@@ -137,8 +140,8 @@ def plural_mutation(word):
     is_last = True
     while index >= 0:
         single = word[index]
-        duo = word[index-1]+word[index]
         if is_vowel(single):
+            duo = word[index - 1] + word[index]
             if index > 0 and is_diphthong(duo):
                 plural = mutate_vowel(duo, is_last) + plural
                 index -= 2

@@ -1,4 +1,4 @@
-"""Main code for Sindarian trainer"""
+"""Main code for Sindarin trainer"""
 #    Copyright (C) 2017  Karel "laird Odol" Murgas
 #    karel.murgas@gmail.com
 #

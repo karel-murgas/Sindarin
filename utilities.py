@@ -1,4 +1,4 @@
-"""Uttility functions for Sindarian trainer"""
+"""Utility functions for Sindarin trainer"""
 #    Copyright (C) 2017  Karel "laird Odol" Murgas
 #    karel.murgas@gmail.com
 #
@@ -26,7 +26,7 @@
 #############
 
 
-def loadtable(path, separator):
+def load_table(path, separator):
     """Load table from text file as list of lists (rows of elements)"""
 
     rows = open(path, mode="r", encoding="utf8")
