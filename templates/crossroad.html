@@ -1,0 +1,20 @@
+<!doctype html>
+<head>
+  <title>Crossroad for grammar rules</title>
+</head>
+<body>
+
+<h1>Sindarin grammar</h1>
+<p>Choose a Sindarin word and grammar rules to apply to it.</p>
+
+<form action="/result">
+  First name:<br>
+  <input type="text" name="word" value="" required placeholder="Type a Sindarin word">
+  <br>
+  Grammar to apply:<br>
+  <input type="checkbox" name="rules" value="mutate">Mutations<br>
+  <input type="checkbox" name="rules" value="pluralize">Plural<br>
+  <input type="submit" value="Show me!">
+</form>
+
+</body>

@@ -28,19 +28,19 @@ ROOT_EXCEPTIONS_STARTS = {
 }
 
 ROOT_EXCEPTIONS_FILES = {
-    "d": "Resources/nd_roots.txt",
-    "b": "Resources/mb_roots.txt",
-    "g": "Resources/ng_roots.txt",
+    "d": "resources/nd_roots.txt",
+    "b": "resources/mb_roots.txt",
+    "g": "resources/ng_roots.txt",
 }
 
 MUTATIONS_FILES = {
-    1: "Resources/mutations_1_letter.csv",
-    2: "Resources/mutations_2_letters.csv",
+    1: "resources/mutations_1_letter.csv",
+    2: "resources/mutations_2_letters.csv",
 }
 
-PLURAL_EXCEPTIONS_FILE = "Resources/plural_exceptions.csv"
+PLURAL_EXCEPTIONS_FILE = "resources/plural_exceptions.csv"
 
 PLURAL_MUTATIONS_FILES = {
-    1: "Resources/plural_vowel_mutations_single.csv",
-    2: "Resources/plural_vowel_mutations_diphthongs.csv"
+    1: "resources/plural_vowel_mutations_single.csv",
+    2: "resources/plural_vowel_mutations_diphthongs.csv"
 }
