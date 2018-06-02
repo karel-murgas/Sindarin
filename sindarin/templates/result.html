@@ -1,28 +1,37 @@
-<!doctype html>
-<head>
-    <title>Results of grammar rules</title>
-</head>
+{% extends "layout.html" %}
 
-<body>
+{% block head %}
+<title>Sindarin Tools - results</title>
+{% endblock head %}
+
+{% block content %}
 <h1>Here are the results:</h1>
-<p>The word of choice is <strong>{{ word }}</strong></p>
-{% if mutations %}
-    <h2>Mutations:</h2>
-    <table>
-        <tr>
-            <td colspan="2">The mutations are:</td>
-        </tr>
-        {% for row in mutations %}
-        <tr>
-            <td>{{ row }}</td>
-            <td><strong>{{ mutations[row] }}</strong></td>
-        </tr>
-        {% endfor %}
-    </table>
-{% endif %}
-{% if plural %}
-    <h2>Plural</h2>
-    The plural is <strong>{{ plural }}</strong>
-{% endif %}
-
-</body>
+<div class="card" style="max-width: 20em; margin-top: 2em">
+ <div class="card-body">
+  <h2 class="card-title">Results</h2>
+  <p class="card-text">
+  {% if word %}
+   The word of choice is <em>{{ word }}</em>
+  {% else %}
+   You did not specify any word.
+  {% endif %}
+ </p>
+  {% if mutations %}
+   <h2 class="card-title">Mutations</h2>
+   <table class="table-sm table-hover">
+    <p class="card-text">The mutations are:</p>
+    {% for row in mutation_keys %}
+    <tr>
+     <td>{{ row }}</td>
+     <td><em>{{ mutations[row] }}</em></td>
+    </tr>
+    {% endfor %}
+   </table>
+  {% endif %}
+  {% if plural %}
+   <h2 class="card-title">Plural</h2>
+     <p class="card-text">The plural is <em>{{ plural }}</em></p>
+  {% endif %}
+ </div>
+</div>
+{% endblock content %}
