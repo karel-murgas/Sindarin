@@ -1,20 +1,50 @@
-<!doctype html>
-<head>
-  <title>Crossroad for grammar rules</title>
-</head>
-<body>
+{% extends "layout.html" %}
 
-<h1>Sindarin grammar</h1>
-<p>Choose a Sindarin word and grammar rules to apply to it.</p>
+{% block head %}
+<title>Crossroads for Grammatical Rules</title>
+{% endblock head %}
 
-<form action="/result">
-  First name:<br>
-  <input type="text" name="word" value="" required placeholder="Type a Sindarin word">
-  <br>
-  Grammar to apply:<br>
-  <input type="checkbox" name="rules" value="mutate">Mutations<br>
-  <input type="checkbox" name="rules" value="pluralize">Plural<br>
-  <input type="submit" value="Show me!">
-</form>
+{% block content %}
+<h1>Sindarin Tools</h1>
 
-</body>
+<div class="card" style="max-width: 35em; margin-top: 2em">
+ <div class="card-body">
+  <h2 class="card-title">Grammar</h2>
+  <p class="card-text">Choose a Sindarin word and grammatical rules to apply to it.</p>
+
+  <form action="/result">
+   <div class="form-group row">
+    <label for="word" class="col-sm-3 col-form-label">Sindarin Word:</label>
+    <div class="col-sm-7">
+     <input class="form-control" type="text" name="word" id="word" value="" required placeholder="peth">
+    </div>
+   </div>
+
+   <div class="form-group row">
+    <span class="col-sm-3 col-form-label">Rules to apply:</span>
+    <div class="col-sm-7">
+     <div class="form-check">
+      <label class="form-check-label">
+       <input class="form-check-input" type="checkbox" name="rules" value="mutate">
+       Mutations
+      </label>
+     </div>
+
+     <div class="form-check">
+      <label class="form-check-label">
+       <input class="form-check-input" type="checkbox" name="rules" value="pluralize">
+       Plural
+      </label>
+     </div>
+    </div>
+   </div>
+
+   <div class="form-group row">
+    <div class="col-sm-7 offset-sm-3">
+     <button type="submit" class="btn btn-primary">Show me!</button>
+    </div>
+   </div>
+  </form>
+ </div>
+</div>
+{% endblock content %}
