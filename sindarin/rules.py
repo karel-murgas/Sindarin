@@ -41,7 +41,7 @@ def modify_for_root_exception(word):
 
     char = word[0]
     if char in ROOT_EXCEPTIONS:
-        exceptions = load_table(ROOT_EXCEPTIONS_FILES[char], separator=",")
+        exceptions = load_table(ROOT_EXCEPTIONS_FILES[char])
         if word in [row[0] for row in exceptions]:
             return ROOT_EXCEPTIONS_STARTS[char] + word
     return word
@@ -60,7 +60,7 @@ def create_mutation_dictionary(prefixes, end):
 
 
 def try_mutation(word, length):
-    mutation_table = load_table(MUTATIONS_FILES[length], separator=",")
+    mutation_table = load_table(MUTATIONS_FILES[length])
     start = word[:length]
     end = word[length:]
     for row in mutation_table:
@@ -88,7 +88,7 @@ def mutate(word):
 def try_plural_exception(word):
     """Look into list of exception, if there is the given word, then return its plural"""
 
-    exceptions = load_table(PLURAL_EXCEPTIONS_FILE, separator=",")
+    exceptions = load_table(PLURAL_EXCEPTIONS_FILE)
     for row in exceptions:
         if row[0] == word:
             return row[1]
@@ -123,7 +123,7 @@ def is_diphthong(duo):
 def mutate_vowel(chars, is_last):
     """Mutate diphthong according to table"""
 
-    mutation_table = load_table(PLURAL_MUTATIONS_FILES[len(chars)], separator=",")
+    mutation_table = load_table(PLURAL_MUTATIONS_FILES[len(chars)])
     if is_last:
         column = 2
     else:

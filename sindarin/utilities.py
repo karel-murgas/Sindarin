@@ -23,6 +23,7 @@
 #############
 
 from os.path import join
+from csv import reader
 
 from sindarin.constants import RESOURCES
 
@@ -32,13 +33,10 @@ from sindarin.constants import RESOURCES
 #############
 
 
-def load_table(path, separator):
+def load_table(path):
     """Load table from text file as list of lists (rows of elements)"""
 
     resource_path = join(RESOURCES, path)
 
-    rows = open(resource_path, mode="r", encoding="utf8")
-    file = []
-    for r in rows:
-        file.append(r[:-1].split(separator))  # Delete "\n" character and separate by separator
-    return file
+    with open(resource_path, mode="r", encoding="utf8") as fp:
+        return list(reader(fp))
