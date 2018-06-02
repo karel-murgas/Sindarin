@@ -48,14 +48,16 @@ def crossroad():
 
 @app.route("/result")
 def res():
-    word = request.args.get("word")
+    word = request.args.get("word").lower()
     chosen_rules = request.args.getlist("rules")
     mutations = None
+    mutation_keys = None
     plural = None
     if word:
         if "mutate" in chosen_rules:
             mutations = mutate(word)
+            mutation_keys = sorted(mutations)
         if "pluralize" in chosen_rules:
             plural = pluralize(word)
 
-    return render_template("result.html", word=word, mutation_keys=sorted(mutations), mutations=mutations, plural=plural)
+    return render_template("result.html", word=word, mutation_keys=mutation_keys, mutations=mutations, plural=plural)
