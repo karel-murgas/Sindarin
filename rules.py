@@ -1,4 +1,3 @@
-"""Define grammar rules for Sindarin trainer"""
 #    Copyright (C) 2017  Karel "laird Odol" Murgas
 #    karel.murgas@gmail.com
 #
@@ -14,6 +13,9 @@
 #
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+"""Define grammar rules for Sindarin trainer"""
 
 
 #############
