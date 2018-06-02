@@ -15,47 +15,40 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-"""Define webpage-function flask relations for html version"""
+"""Define constants for Sindarin trainer"""
+
+
+from os.path import dirname, join
 
 
 #############
-# Libraries #
+# Constants #
 #############
 
-from rules import *
-from flask import Flask
-from flask import request
-from flask import render_template
+RESOURCES = join(dirname(__file__), 'resources')
 
+ROOT_EXCEPTIONS = ("d", "b", "g")
 
-#############
-# Functions #
-#############
+ROOT_EXCEPTIONS_STARTS = {
+    "d": "n",
+    "b": "m",
+    "g": "n",
+}
 
+ROOT_EXCEPTIONS_FILES = {
+    "d": "nd_roots.txt",
+    "b": "mb_roots.txt",
+    "g": "ng_roots.txt",
+}
 
-#########
-# Flask #
-#########
+MUTATIONS_FILES = {
+    1: "mutations_1_letter.csv",
+    2: "mutations_2_letters.csv",
+}
 
-app = Flask(__name__)
+PLURAL_EXCEPTIONS_FILE = "plural_exceptions.csv"
 
-
-@app.route("/")
-def crossroad():
-    return render_template("crossroad.html")
-
-
-@app.route("/result")
-def res():
-    word = request.args.get("word")
-    rules = request.args.getlist("rules")
-    if "mutate" in rules:
-        mutations = mutate(word)
-    else:
-        mutations = None
-    if "pluralize" in rules:
-        plural = pluralize(word)
-    else:
-        plural = None
-
-    return render_template("result.html", word=word, mutations=mutations, plural=plural)
+PLURAL_MUTATIONS_FILES = {
+    1: "plural_vowel_mutations_single.csv",
+    2: "plural_vowel_mutations_diphthongs.csv"
+}

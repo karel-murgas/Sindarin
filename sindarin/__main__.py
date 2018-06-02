@@ -22,7 +22,7 @@
 # Libraries #
 #############
 
-from rules import *
+from sindarin.rules import *
 
 
 #############
@@ -83,4 +83,5 @@ def run():
             repeat = False
 
 
-run()
+if __name__ == '__main__':
+    run()

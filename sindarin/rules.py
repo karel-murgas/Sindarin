@@ -22,8 +22,8 @@
 # Libraries #
 #############
 
-from utilities import *
-from constants import *
+from sindarin.utilities import *
+from sindarin.constants import *
 
 
 #############

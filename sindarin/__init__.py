@@ -15,12 +15,18 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-"""Utility functions for Sindarin trainer"""
+"""Define webpage-function flask relations for html version"""
 
 
 #############
 # Libraries #
 #############
+
+from flask import Flask
+from flask import request
+from flask import render_template
+
+from sindarin.rules import *
 
 
 #############
@@ -28,11 +34,29 @@
 #############
 
 
-def load_table(path, separator):
-    """Load table from text file as list of lists (rows of elements)"""
+#########
+# Flask #
+#########
 
-    rows = open(path, mode="r", encoding="utf8")
-    file = []
-    for r in rows:
-        file.append(r[:-1].split(separator))  # Delete "\n" character and separate by separator
-    return file
+app = Flask(__name__)
+
+
+@app.route("/")
+def crossroad():
+    return render_template("crossroad.html")
+
+
+@app.route("/result")
+def res():
+    word = request.args.get("word")
+    rules = request.args.getlist("rules")
+    if "mutate" in rules:
+        mutations = mutate(word)
+    else:
+        mutations = None
+    if "pluralize" in rules:
+        plural = pluralize(word)
+    else:
+        plural = None
+
+    return render_template("result.html", word=word, mutations=mutations, plural=plural)

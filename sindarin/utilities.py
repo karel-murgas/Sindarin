@@ -15,35 +15,30 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-"""Define constants for Sindarin trainer"""
+"""Utility functions for Sindarin trainer"""
 
 
 #############
-# Constants #
+# Libraries #
 #############
 
-ROOT_EXCEPTIONS = ("d", "b", "g")
+from os.path import join
 
-ROOT_EXCEPTIONS_STARTS = {
-    "d": "n",
-    "b": "m",
-    "g": "n",
-}
+from sindarin.constants import RESOURCES
 
-ROOT_EXCEPTIONS_FILES = {
-    "d": "resources/nd_roots.txt",
-    "b": "resources/mb_roots.txt",
-    "g": "resources/ng_roots.txt",
-}
 
-MUTATIONS_FILES = {
-    1: "resources/mutations_1_letter.csv",
-    2: "resources/mutations_2_letters.csv",
-}
+#############
+# Functions #
+#############
 
-PLURAL_EXCEPTIONS_FILE = "resources/plural_exceptions.csv"
 
-PLURAL_MUTATIONS_FILES = {
-    1: "resources/plural_vowel_mutations_single.csv",
-    2: "resources/plural_vowel_mutations_diphthongs.csv"
-}
+def load_table(path, separator):
+    """Load table from text file as list of lists (rows of elements)"""
+
+    resource_path = join(RESOURCES, path)
+
+    rows = open(resource_path, mode="r", encoding="utf8")
+    file = []
+    for r in rows:
+        file.append(r[:-1].split(separator))  # Delete "\n" character and separate by separator
+    return file
