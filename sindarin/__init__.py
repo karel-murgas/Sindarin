@@ -46,6 +46,11 @@ def crossroad():
     return render_template("crossroad.html")
 
 
+@app.route("/plurals")
+def plurals():
+    return render_template("pluralize.html")
+
+
 @app.route("/result")
 def res():
     word = request.args.get("word").lower()

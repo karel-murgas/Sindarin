@@ -114,7 +114,7 @@ def is_vowel(char):
 def is_diphthong(duo):
     """True if given two characters are legitimate diphthongs in Sindarin"""
 
-    if duo in ("ae", "ai", "au", "ei", "ie", "io", "iô", "oe", "ui"):
+    if duo in ("ai", "ae", "au", "ei", "ie", "io", "iô", "ui"):
         return True
     else:
         return False
@@ -134,6 +134,18 @@ def mutate_vowel(chars, is_last):
     return chars
 
 
+def no_vowels(word):
+    """Return true if the word does not contain any vowel"""
+
+    no_vow = True
+    for c in word:
+        if is_vowel(c):
+            no_vow = False
+            break
+
+    return no_vow
+
+
 def plural_mutation(word):
     """Mutate vowels of given word to return its plural"""
 
@@ -142,8 +154,8 @@ def plural_mutation(word):
     is_last = True
     while index >= 0:
         single = word[index]
+        duo = word[index - 1] + word[index]
         if is_vowel(single):
-            duo = word[index - 1] + word[index]
             if index > 0 and is_diphthong(duo):
                 plural = mutate_vowel(duo, is_last) + plural
                 index -= 2
@@ -152,8 +164,12 @@ def plural_mutation(word):
                 index -= 1
             is_last = False
         else:
-            plural = single + plural
-            index -= 1
+            if is_last and duo == "aw" and no_vowels(word[:index-1]):
+                plural = "oe" + plural
+                index -= 2
+            else:
+                plural = single + plural
+                index -= 1
 
     return plural
 
